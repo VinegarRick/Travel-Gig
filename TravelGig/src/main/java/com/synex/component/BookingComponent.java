@@ -9,12 +9,13 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Component
 public class BookingComponent {
 
 	public JsonNode saveBooking(JsonNode booking) {
-		System.out.println("inside Rest Client");
+		System.out.println("inside saveBooking of BookingComponent");
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -34,7 +35,7 @@ public class BookingComponent {
 	}
 	
 	public JsonNode saveGuest(JsonNode guest) {
-		System.out.println("inside Rest Client");
+		System.out.println("inside saveGuest of BookingComponent");
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -51,5 +52,42 @@ public class BookingComponent {
 				
 		
 		return returnObj;
+	}
+	
+	public JsonNode findAllBookings() {
+		System.out.println("inside findAllBookings of BookingComponent");
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<Object> responseEntity = restTemplate.getForEntity("http://localhost:8484/findAllBookings", Object.class);
+		Object objects = responseEntity.getBody();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode returnObj = mapper.convertValue(objects, JsonNode.class);
+				
+		
+		return returnObj;
+	}
+	
+	public JsonNode updateBookingStatus(int bookingId, String status) {
+	    System.out.println("inside updateBookingStatus of BookingComponent");
+
+	    ObjectMapper mapper = new ObjectMapper();
+	    ObjectNode requestBody = mapper.createObjectNode();
+	    requestBody.put("bookingId", bookingId);
+	    requestBody.put("status", status);
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+
+	    HttpEntity<JsonNode> requestEntity = new HttpEntity<>(requestBody, headers);
+
+	    RestTemplate restTemplate = new RestTemplate();
+
+	    ResponseEntity<Object> responseEntity = restTemplate.postForEntity("http://localhost:8484/updateBookingStatus", requestEntity, Object.class);
+
+	    Object objects = responseEntity.getBody();
+
+	    JsonNode returnObj = mapper.convertValue(objects, JsonNode.class);
+
+	    return returnObj;
 	}
 }

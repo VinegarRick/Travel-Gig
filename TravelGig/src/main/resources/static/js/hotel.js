@@ -245,7 +245,7 @@ $(document).ready(function() {
 			hotelId: hotelId, 
 			hotelRoomId: hotelRoomId, 
 			noRooms: noRooms,
-			price: price,
+			price: price * noRooms,
 			roomType: roomType,
 			status: status,
 			taxRateInPercent: 0.0,
@@ -257,7 +257,7 @@ $(document).ready(function() {
 		
 		var requestData = {
 			bookingData: bookingData, 
-			guests: guests
+			guests: guests,
 		}
 		
 		$.ajax({

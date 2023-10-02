@@ -15,10 +15,10 @@
 </head>
 <body>
 <div class="container" style="margin-left:100px">
-<a href='login?logout'>Logout</a>
+<!--<a href='login?logout'>Logout</a>-->
 <h1>Welcome to Travel Gig</h1>
 <h2>Search your desired hotel</h2>
-</h3>
+<%@ include file ="menu.jsp" %><br>
 </div>
 
 <div class="container border rounded" style="margin:auto;padding:50px;margin-top:50px;margin-bottom:50px">
