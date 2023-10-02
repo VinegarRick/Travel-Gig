@@ -82,7 +82,6 @@ $(document).ready(function() {
 				//var cancelUrl = "cancelBooking.html?id=" + value1.bookingId;
 				//var reviewUrl = "writeReview.html?id=" + value1.bookingId;
 			    var buttonHtml = "";
-			    console.log("bookingId: " + value1.bookingId + ", status: " + value1.status);
 			    if (value1.status === "COMPLETED") {
 			        buttonHtml = "<button class='review-button'>Review</button>";
 			        $("#completedBookingTblBody").append("<tr><td>" + value1.bookingId + "</td><td>" + value1.checkInDate + "</td><td>" + value1.checkOutDate + "</td><td>" + value1.noRooms + "</td><td>" + value1.price + "</td><td>" + value1.roomType + "</td><td>" + value1.status + "</td><td>" + buttonHtml + "</td></tr>");
@@ -133,6 +132,46 @@ $(document).ready(function() {
             }
         });
     });
-	
+    
+    $("#completedBookingTblBody").on("click", ".review-button", function(e) {
+        e.preventDefault();
+
+        var bookingId = $(this).closest("tr").find("td:first").text();
+        $("#modal_bookingId").val(bookingId);
+        
+        $('#modal_reviewText').val(''); 
+        $('#modal_rating').val(''); 
+
+        // Open the review modal
+        $("#reviewModal").modal("show");
+    });
+
+    $("#modal_saveReviewButton").click(function() {
+        var bookingId = $("#modal_bookingId").val();
+        var reviewText = $("#modal_reviewText").val();
+        var rating = $("#modal_rating").val();
+        
+        var requestData = {
+            review: {overallRating: rating, text: reviewText},
+            bookingId: bookingId
+        };
+        
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "http://localhost:8282/saveReview",
+            data: JSON.stringify(requestData),
+            dataType: "json",
+            success: function(data) {
+				$(this).remove();
+				console.log("review saved")
+            }.bind(this), 
+            error: function(e) {
+                console.error("Error:", e);
+            }
+        });
+
+        $("#reviewModal").modal("hide");
+    });
 	
 });

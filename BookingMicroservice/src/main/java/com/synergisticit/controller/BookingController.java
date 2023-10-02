@@ -9,16 +9,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synergisticit.domain.Booking;
 import com.synergisticit.domain.Guest;
+import com.synergisticit.domain.Review;
 import com.synergisticit.service.BookingService;
 import com.synergisticit.service.GuestService;
+import com.synergisticit.service.ReviewService;
 
 @RestController
 public class BookingController {
 	
 	@Autowired BookingService bookingService;
 	@Autowired GuestService guestService;
+	@Autowired ReviewService reviewService;
 	
 	@PostMapping(value="/saveBooking")
 	public Booking saveBooking(@RequestBody Booking booking) {
@@ -59,5 +63,31 @@ public class BookingController {
 			System.out.println("No booking exists with id: " + bookingId);
 			return null;
 		}
+	}
+	
+	@PostMapping(value="/saveReview")
+	//public Review saveReview(@RequestBody Review review) {
+	public Review saveReview(@RequestBody Map<String, Object> requestBody) {
+		System.out.println("saving review...");
+		
+	    Map<String, Object> reviewMap = (Map<String, Object>) requestBody.get("review");
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    Review review = objectMapper.convertValue(reviewMap, Review.class);
+		
+		//Review review = (Review)requestBody.get("review");
+		int bookingId = (int)requestBody.get("bookingId");
+		
+		Review myReview = reviewService.saveReview(review);
+		
+		Booking existingBooking = bookingService.findById(bookingId);
+		if (existingBooking != null) {
+			existingBooking.setReview(myReview);
+			bookingService.saveBooking(existingBooking);
+		} else {
+			System.out.println("No booking exists with id: " + bookingId);
+			return null;
+		}
+				
+		return myReview;
 	}
 }

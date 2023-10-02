@@ -50,6 +50,7 @@ public class HotelComponent {
 				
 		return returnObj;		
 	}
+
 }
 
 

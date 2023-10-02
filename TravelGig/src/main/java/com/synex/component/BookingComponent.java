@@ -90,4 +90,28 @@ public class BookingComponent {
 
 	    return returnObj;
 	}
+	
+	public JsonNode saveReview(JsonNode review, int bookingId) {
+		System.out.println("inside saveReview of BookingComponent");
+		
+	    ObjectMapper mapper = new ObjectMapper();
+	    ObjectNode requestBody = mapper.createObjectNode();
+	    requestBody.put("review", review);
+	    requestBody.put("bookingId", bookingId);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		
+		HttpEntity<JsonNode> requestEntity = new HttpEntity<>(requestBody, headers);
+		
+		RestTemplate restTemplate = new RestTemplate();
+		
+		ResponseEntity<Object> responseEntity = restTemplate.postForEntity("http://localhost:8484/saveReview", requestEntity, Object.class);
+		Object objects = responseEntity.getBody();
+		
+		JsonNode returnObj = mapper.convertValue(objects, JsonNode.class);
+				
+		return returnObj;
+	}
+	
 }

@@ -83,4 +83,14 @@ public class GatewayController {
 		return bookingComponent.findAllBookings();
 	}
 	
+	@Transactional
+	@PostMapping(value="/saveReview")
+	public JsonNode saveReview(@RequestBody JsonNode payload) {
+		JsonNode review = payload.get("review");
+		int bookingId = payload.get("bookingId").asInt();
+		
+		JsonNode myReview = bookingComponent.saveReview(review, bookingId);		
+		
+		return myReview;
+	}
 }

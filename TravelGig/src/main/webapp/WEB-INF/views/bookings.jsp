@@ -104,5 +104,36 @@
         <tbody id="cancelledBookingTblBody">
         </tbody>
     </table>
+
+    <div class="modal" id="reviewModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <div class="modal-header">
+              <h4 class="modal-title">Write a Review</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+      
+            <div class="modal-body">        
+              <div class="col">
+                  <input class="form-control" type="hidden" id="modal_bookingId"/>
+                  <label for="modal_reviewText">Review:</label>
+                  <textarea class="form-control" id="modal_reviewText" rows="4"></textarea>
+                  <label for="modal_rating">Rating (1-5):</label>
+                  <input class="form-control" type="number" id="modal_rating" name="modal_rating" min="1" max="5">
+
+                  <input style="margin-top:25px" class="btn btn-saveReview form-control btn-primary" type="button" id="modal_saveReviewButton" value="SAVE REVIEW"/>       	
+              </div>
+              
+            </div>
+      
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+
 </body>
 </html>
