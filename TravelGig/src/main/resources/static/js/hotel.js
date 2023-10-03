@@ -170,9 +170,29 @@ $(document).ready(function() {
 	
 	            if (reviews.length > 0) {
 	                $.each(reviews, function(index, review) {
-	                    modalBody.append("<p><strong>Rating:</strong> " + review.overallRating + "</p>");
-	                    modalBody.append("<p><strong>Review:</strong> " + review.text + "</p>");
-	                    modalBody.append("<hr>");
+						
+						$.ajax({
+							type: "GET",
+							contentType: "application/json",
+							url: "http://localhost:8282/findBookingByReviewId/" + review.reviewId,
+							success: function(booking) {
+								modalBody.append("<p><strong>Date:</strong> " + booking.checkOutDate + "</p>");
+								//modalBody.append("<strong>Date:</strong> " + booking.checkOutDate);
+								//modalBody.append("<p><strong>User:</strong> " + booking.userName + "</p>");
+								modalBody.append("<strong>User:</strong> " + booking.userName + "<br>");
+			                    modalBody.append("<strong>Rating:</strong> " + review.overallRating + "<br>");
+			                    //modalBody.append("<p><strong>Review:</strong> " + review.text + "</p>");
+								modalBody.append("<strong>Review:</strong><br>");
+								modalBody.append("<span>" + review.text + "</span>");
+
+
+			                    modalBody.append("<hr>");
+							},
+							error: function() {
+								console.error("Error fetching bookings corresponding to reviews");
+							}
+						})
+						
 	                });
 	            } else {
 	                modalBody.append("<p>No reviews available for this hotel.</p>");
@@ -307,6 +327,7 @@ $(document).ready(function() {
 			},
 		})
 		
+		$("#booking_customerMobile").val(''); 
 		$("#bookingHotelRoomModal").modal("hide");
 	});
 	

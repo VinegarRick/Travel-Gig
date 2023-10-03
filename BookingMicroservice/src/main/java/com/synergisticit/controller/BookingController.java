@@ -54,6 +54,11 @@ public class BookingController {
 		return reviewService.findReviewsByHotelId(hotelId);
 	}
 	
+	@GetMapping(value="/findBookingByReviewId/{reviewId}")
+	public Booking findBookingByReviewId(@PathVariable int reviewId) {
+		return bookingService.findBookingByReviewId(reviewId);
+	}
+	
 	@PostMapping(value="/updateBookingStatus")
 	public Booking updateBookingStatus(@RequestBody Map<String, Object> requestBody) {
 		System.out.println("updating booking status...");

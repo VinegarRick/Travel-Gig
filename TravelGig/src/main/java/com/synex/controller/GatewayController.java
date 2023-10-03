@@ -99,4 +99,9 @@ public class GatewayController {
 	public JsonNode findReviewsByHotelId(@PathVariable int hotelId) {
 		return bookingComponent.findReviewsByHotelId(hotelId);
 	}
+	
+	@GetMapping(value="/findBookingByReviewId/{reviewId}")
+	public JsonNode findBookingByReviewId(@PathVariable int reviewId) {
+		return bookingComponent.findBookingByReviewId(reviewId);
+	}
 }

@@ -1,5 +1,6 @@
 package com.synergisticit.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class Review {
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		private int reviewId;
 		
+		@Column(length = 4000)
 		private String text;
 		private double overallRating;
 

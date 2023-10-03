@@ -35,4 +35,18 @@ public class BookingService {
 	public Booking findById(int bookingId) {
 		return bookingRepository.findById(bookingId).orElse(null);
 	}
+	
+	public Booking findBookingByReviewId(int reviewId) {
+		/*List<Booking> bookings = new ArrayList<>();
+		Iterable<Booking> iterable = bookingRepository.findByReviewId(reviewId);
+		Iterator<Booking> itr = iterable.iterator();
+		
+		while (itr.hasNext()) {
+			bookings.add(itr.next());
+		}*/
+		
+		return bookingRepository.findByReviewId(reviewId);
+		
+		//return bookings;
+	}
 }

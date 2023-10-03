@@ -126,4 +126,17 @@ public class BookingComponent {
 		
 		return returnObj;
 	}
+	
+	public JsonNode findBookingByReviewId(int reviewId) {
+		System.out.println("inside findBookingByReviewId of BookingComponent");
+		
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<Object> responseEntity = restTemplate.getForEntity("http://localhost:8484/findBookingByReviewId/" + reviewId, Object.class);
+		Object objects = responseEntity.getBody();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode returnObj = mapper.convertValue(objects, JsonNode.class);
+		
+		return returnObj;
+	}
 }
