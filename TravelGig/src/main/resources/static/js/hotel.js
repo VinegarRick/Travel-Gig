@@ -154,6 +154,39 @@ $(document).ready(function() {
 		$("#guestsModal").modal("toggle");
 	});
 	
+	$("#myModal").on('click', '#modal_moveToReviews', function() {		
+		var hotelId = $("#modal_hotelId").val();
+		var hotelName = $("#modal_hotelName").val();
+		
+		//$("review_hotelName").val(hotelName);
+		
+	    $.ajax({
+	        type: "GET",
+	        contentType: "application/json",
+	        url: "http://localhost:8282/findReviewsByHotelId/" + hotelId,
+	        success: function(reviews) {
+	            var modalBody = $("#reviewsModal .modal-body");
+	            modalBody.empty();
+	
+	            if (reviews.length > 0) {
+	                $.each(reviews, function(index, review) {
+	                    modalBody.append("<p><strong>Rating:</strong> " + review.overallRating + "</p>");
+	                    modalBody.append("<p><strong>Review:</strong> " + review.text + "</p>");
+	                    modalBody.append("<hr>");
+	                });
+	            } else {
+	                modalBody.append("<p>No reviews available for this hotel.</p>");
+	            }
+	
+	            $("#reviewsModal").modal("show");
+	        },
+	        error: function() {
+	            console.error("Error fetching reviews.");
+	        }
+	    });
+		
+	});
+	
     $("#guestsModal").on('click', '#modal_moveToBooking', function() {
 		var hotelId = $("#modal_hotelId").val();
         var hotelName = $("#modal_hotelName").val();
@@ -250,8 +283,8 @@ $(document).ready(function() {
 			status: status,
 			taxRateInPercent: 0.0,
 			totalSavings: discount * noRooms, 
-			userEmail: "",
-			username: "",
+			//userEmail: "",
+			//username: "",
 			review_ReviewId: -1
 		}
 		

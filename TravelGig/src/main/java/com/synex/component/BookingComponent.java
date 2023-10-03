@@ -54,10 +54,10 @@ public class BookingComponent {
 		return returnObj;
 	}
 	
-	public JsonNode findAllBookings() {
-		System.out.println("inside findAllBookings of BookingComponent");
+	public JsonNode findAllBookingsByUsername(String username) {
+		System.out.println("inside findAllBookingsByUsername of BookingComponent");
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<Object> responseEntity = restTemplate.getForEntity("http://localhost:8484/findAllBookings", Object.class);
+		ResponseEntity<Object> responseEntity = restTemplate.getForEntity("http://localhost:8484/findAllBookingsByUsername/" + username, Object.class);
 		Object objects = responseEntity.getBody();
 		
 		ObjectMapper mapper = new ObjectMapper();
@@ -114,4 +114,16 @@ public class BookingComponent {
 		return returnObj;
 	}
 	
+	public JsonNode findReviewsByHotelId(int hotelId) {
+		System.out.println("inside findReviewsByHotelId of BookingComponent");
+		
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<Object> responseEntity = restTemplate.getForEntity("http://localhost:8484/findReviewsByHotelId/" + hotelId, Object.class);
+		Object objects = responseEntity.getBody();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode returnObj = mapper.convertValue(objects, JsonNode.class);
+		
+		return returnObj;
+	}
 }

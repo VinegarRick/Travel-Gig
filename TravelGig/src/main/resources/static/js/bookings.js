@@ -53,7 +53,7 @@ $(document).ready(function() {
 	$.ajax({
 		type:"GET",
 		contentType: "application/json",
-		url: "http://localhost:8282/findAllBookings",
+		url: "http://localhost:8282/findAllBookingsByUsername",
 		success: function(result) {
 			$.each(result, function(key1, value1) {
 		        

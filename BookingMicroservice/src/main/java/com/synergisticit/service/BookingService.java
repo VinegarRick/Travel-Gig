@@ -20,9 +20,9 @@ public class BookingService {
 		return bookingRepository.save(booking);
 	}
 	
-	public List<Booking> findAllBookings() {
+	public List<Booking> findAllBookingsByUsername(String username) {
 		List<Booking> bookings = new ArrayList<>();
-		Iterable<Booking> iterable = bookingRepository.findAll();
+		Iterable<Booking> iterable = bookingRepository.findByUserName(username);
 		Iterator<Booking> itr = iterable.iterator();
 		
 		while (itr.hasNext()) {

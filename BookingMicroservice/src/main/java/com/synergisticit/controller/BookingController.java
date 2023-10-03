@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,11 +42,16 @@ public class BookingController {
 		}
 	}	
 	
-	@GetMapping(value="/findAllBookings")
-	public List<Booking> findAllBookings() {
-		System.out.println("retrieving all bookings...");
+	@GetMapping(value="/findAllBookingsByUsername/{username}")
+	public List<Booking> findAllBookingsByUsername(@PathVariable String username) {
+		System.out.println("retrieving all bookings by username: " + username + "...");
 		
-		return bookingService.findAllBookings();
+		return bookingService.findAllBookingsByUsername(username);
+	}
+	
+	@GetMapping(value="/findReviewsByHotelId/{hotelId}")
+	public List<Review> findReviewsByHotelId(@PathVariable int hotelId) {
+		return reviewService.findReviewsByHotelId(hotelId);
 	}
 	
 	@PostMapping(value="/updateBookingStatus")

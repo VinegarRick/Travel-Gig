@@ -40,7 +40,8 @@ public class GatewayController {
 		String username = principal.getName();
 		String emailAddress = userService.findByUserName(username).getEmail();
 				
-		((ObjectNode) bookingData).put("username", username);
+		((ObjectNode) bookingData).put("userName", username);
+		((ObjectNode) bookingData).put("userEmail", emailAddress);
 		
 		//if (newBookingNode != null && newBookingNode.asInt() == 1) {
 			bookingComponent.saveGuest(guestsNode);
@@ -78,9 +79,9 @@ public class GatewayController {
 		return hotelComponent.findHotelRoomsByHotelId(hotelId);
 	}
 	
-	@GetMapping(value="/findAllBookings")
-	public JsonNode findAllBookings() {
-		return bookingComponent.findAllBookings();
+	@GetMapping(value="/findAllBookingsByUsername")
+	public JsonNode findAllBookingsByUsername(Principal principal) {
+		return bookingComponent.findAllBookingsByUsername(principal.getName());
 	}
 	
 	@Transactional
@@ -92,5 +93,10 @@ public class GatewayController {
 		JsonNode myReview = bookingComponent.saveReview(review, bookingId);		
 		
 		return myReview;
+	}
+	
+	@GetMapping(value="/findReviewsByHotelId/{hotelId}")
+	public JsonNode findReviewsByHotelId(@PathVariable int hotelId) {
+		return bookingComponent.findReviewsByHotelId(hotelId);
 	}
 }

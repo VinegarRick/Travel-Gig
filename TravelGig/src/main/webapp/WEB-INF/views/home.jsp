@@ -12,6 +12,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="./js/hotel.js"></script>
+<style>
+	.modal-btn {
+		width: 200px;
+	}
+</style>
 </head>
 <body>
 <div class="container" style="margin-left:100px">
@@ -151,7 +156,8 @@
         		<option value="Deluxe">Deluxe</option>-->
         	</select>
         	No. Rooms: <input class="form-control" type="number" id="modal_noRooms"/>
-        	<input style="margin-top:25px" class="btn btn-searchHotelRooms form-control btn-primary" type="button" id="modal_moveToGuests" value="ADD GUESTS"/>       	
+			<input style="margin-top:25px" class="btn btn-showReviews form-control btn-secondary modal-btn" type="button" id="modal_moveToReviews" value="SEE REVIEWS"/> 
+			<input style="margin-top:25px" class="btn btn-searchHotelRooms form-control btn-primary modal-btn" type="button" id="modal_moveToGuests" value="ADD GUESTS"/>         	
         </div>
         
       </div>
@@ -165,6 +171,25 @@
   </div>
 </div>
 
+
+<div class="modal" id="reviewsModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Reviews for Hotel</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- guests modal -->
@@ -207,7 +232,9 @@
 				<option value="Other">Other</option>
 			  </select>			  			  
 
-			  <input style="margin-top:25px" class="btn btn-goToBooking form-control btn-primary" type="button" id="modal_moveToBooking" value="GO TO BOOKING"/>       	
+			  <div class="d-flex justify-content-center">
+			  		<input style="margin-top:25px" class="btn btn-goToBooking form-control btn-primary modal-btn" type="button" id="modal_moveToBooking" value="GO TO BOOKING"/>
+				</div>
 		  </div>
 		  
 		</div>

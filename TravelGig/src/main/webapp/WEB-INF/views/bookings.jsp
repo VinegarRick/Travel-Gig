@@ -117,10 +117,10 @@
             <div class="modal-body">        
               <div class="col">
                   <input class="form-control" type="hidden" id="modal_bookingId"/>
-                  <label for="modal_reviewText">Review:</label>
-                  <textarea class="form-control" id="modal_reviewText" rows="4"></textarea>
                   <label for="modal_rating">Rating (1-5):</label>
                   <input class="form-control" type="number" id="modal_rating" name="modal_rating" min="1" max="5">
+                  <label for="modal_reviewText">Review:</label>
+                  <textarea class="form-control" id="modal_reviewText" rows="4"></textarea>
 
                   <input style="margin-top:25px" class="btn btn-saveReview form-control btn-primary" type="button" id="modal_saveReviewButton" value="SAVE REVIEW"/>       	
               </div>
