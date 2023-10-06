@@ -35,7 +35,6 @@ public class GatewayController {
 	public JsonNode saveBooking(@RequestBody JsonNode payload, Principal principal) {
 		JsonNode bookingData = payload.get("bookingData");
 		JsonNode guestsNode = payload.get("guests");
-		//JsonNode newBookingNode = payload.get("newBooking");
 		
 		String username = principal.getName();
 		String emailAddress = userService.findByUserName(username).getEmail();
@@ -43,14 +42,10 @@ public class GatewayController {
 		((ObjectNode) bookingData).put("userName", username);
 		((ObjectNode) bookingData).put("userEmail", emailAddress);
 		
-		//if (newBookingNode != null && newBookingNode.asInt() == 1) {
-			bookingComponent.saveGuest(guestsNode);
-		//}  
+		bookingComponent.saveGuest(guestsNode);
 		JsonNode booking = bookingComponent.saveBooking(bookingData);
 	    
-		//if (newBookingNode != null && newBookingNode.asInt() == 1) {
-			emailComponent.sendEmail(emailAddress);
-		//}  
+		emailComponent.sendEmail(emailAddress, booking);
 	    
 		return booking;
 	}

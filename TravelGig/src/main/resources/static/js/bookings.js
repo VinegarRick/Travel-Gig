@@ -126,6 +126,7 @@ $(document).ready(function() {
                 $row.clone().appendTo("#cancelledBookings tbody");
                 $row.remove();
                 console.log("booking cancelled");
+                alert("Booking cancelled");
             }.bind(this), 
             error: function(e) {
                 console.error("Error:", e);
@@ -164,7 +165,8 @@ $(document).ready(function() {
             dataType: "json",
             success: function(data) {
 				$(this).remove();
-				console.log("review saved")
+				console.log("review saved");
+				alert("Review saved!");
             }.bind(this), 
             error: function(e) {
                 console.error("Error:", e);

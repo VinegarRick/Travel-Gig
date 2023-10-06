@@ -20,9 +20,9 @@ public class HotelService {
 		
 		List<Hotel> hotels = hotelRepository.findByHotelNameLikeOrCityLikeOrStateLike(searchString, searchString, searchString);
 				
-		for (Hotel hotel : hotels) {
+		/*for (Hotel hotel : hotels) {
 			System.out.println(hotel.getAmenities().size());
-		}
+		}*/
 		
 		return hotels;
 		//return hotelRepository.findByHotelNameLikeOrCityLikeOrStateLike(searchString, searchString, searchString);

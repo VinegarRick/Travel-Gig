@@ -7,7 +7,13 @@ $(document).ready(function() {
 			contentType: "application/json",
 			url: "http://localhost:8282/findHotel/" + searchLocation,
 			success: function(result) {
-				$("#hotelTbl tr").not(".header").remove();			
+				//$("#hotelTbl tr").not(".header").remove();	
+				var headerContainer = $(".header-container");
+                
+                if (result.length > 0) {
+					headerContainer.show();
+					$("#hotelTbl tr").not(".header").remove();	
+                	
 				$.each(result, function(key1, value1) {
 					/*$("#hotelTbl").append("<tr class='hotelInfo'><td>" + value1.hotelName + "</td><td>" + value1.averagePrice + "</td><td>" + value1.starRating + "</td><td><img class='imgLink' height='300' width='300' src='"+ value1.imageURL + "'></td></tr>");*/
 					
@@ -27,6 +33,11 @@ $(document).ready(function() {
 			        
 			        //console.log(value1);
 				});
+				
+				} else {
+					headerContainer.hide();
+					$("#hotelTbl tr").not(".header").remove();	
+				}
 	        },		
 			error: function(e) {
 				
@@ -321,6 +332,7 @@ $(document).ready(function() {
 			dataType: 'json',
 			success: function(data) {
 				console.log('Success:', data);
+				alert("Booking confirmed!");
 			},
 			error: function(e) {
 				console.error('Error:', e);

@@ -16,9 +16,15 @@
 	.modal-btn {
 		width: 200px;
 	}
+
+	.header-container {
+		display: none;
+	}
+
 </style>
 </head>
 <body>
+<!--<div class="header-background">-->
 <div class="container" style="margin-left:100px">
 <!--<a href='login?logout'>Logout</a>-->
 <h1>Welcome to Travel Gig</h1>
@@ -116,11 +122,11 @@
 </div>
 
 
-<div class="col-7 border rounded" style="margin-left:50px;">
+<div class="col-7 border rounded header-container" style="margin-left:50px;">
 	<div style='text-align:center;font-size:20px;font-family:"Trebuchet MS", Helvetica, sans-serif'>List of Hotels:</div>	
 	
 	<div id="listHotel">
-		<table border="1" id="hotelTbl">
+		<table border="1" id="hotelTbl" style="width: 100%; text-align: center;">
 		<tr class="header"><th>Hotel Name</th><th>Image</th><th>Price</th><th>Rating</th><th>Amenities</th></tr>
 		</table>
 	</div>
